@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import MainPage from "./Components/MainPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BannerPg from "./Components/BannerPg";
+import { ConfigProvider } from "antd";
+import { error } from "console";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#1d68d4",
+          colorInfo: "#1d68d4",
+          colorSuccess: "#3da30b",
+          sizeStep: 4,
+          colorLink: "#0752bf",
+        },
+      }}
+    >
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage children={<BannerPg />} />}
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+    </ConfigProvider>
   );
 }
 
