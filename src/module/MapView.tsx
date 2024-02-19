@@ -1,35 +1,29 @@
-import React, { useRef, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { LatLng } from "leaflet";
+import { useEffect, useState } from "react";
+import Embed from 'react-embed';
 
 interface PositionUser {
-    lat: number;
-    lang: number;
+  latitude: number;
+  longitude: number; 
 }
 
 export default function MapView(props: PositionUser) {
-    const mapRef = useRef<any>();
+  const [position, setPosition] = useState(`https://www.google.com/maps/@36.3274702,59.5417707,17.71z?entry=ttu`);
 
-    useEffect(() => {
-        if (mapRef.current) {
-            const map = mapRef.current.leafletElement;
-            map.setView(new LatLng(props.lat, props.lang), 13);
-        }
-    }, [props.lat, props.lang]);
-
-    return (
-        <div>
-            <MapContainer ref={mapRef}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[props.lat, props.lang]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
-            </MapContainer>
-        </div>
-    );
+  useEffect(() => {
+    setPosition(`https://www.google.com/maps/@36.3274702,59.5417707,17.71z?entry=ttu`);
+  }, [props.latitude, props.longitude]);
+  
+  return (
+    <div >
+   
+     <iframe
+        width="600"
+        height="450"
+        style={{ border: 0 }}
+        loading="lazy"
+        allowFullScreen
+        src={position}
+      />
+    </div>
+  );
 }

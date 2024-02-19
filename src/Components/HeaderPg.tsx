@@ -6,12 +6,13 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import { Link } from "react-router-dom";
 
 const items: MenuProps["items"] = [
   {
-    label: "Notiication",
-    key: "mail",
-    icon: <MailOutlined />,
+    label: "SignUp",
+    key: "register",
+    icon: <Link to={'/register'}><MailOutlined /></Link>
   },
   {
     label: "Product",

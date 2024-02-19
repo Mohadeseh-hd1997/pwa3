@@ -2,14 +2,14 @@ import MainPage from "./Components/MainPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BannerPg from "./Components/BannerPg";
 import { ConfigProvider } from "antd";
-import { error } from "console";
+import Register from "./pages/Register";
 
 function App() {
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#1d68d4",
+          colorPrimary: "#ebf2f2",
           colorInfo: "#1d68d4",
           colorSuccess: "#3da30b",
           sizeStep: 4,
@@ -22,7 +22,11 @@ function App() {
           <Route
             path="/"
             element={<MainPage children={<BannerPg />} />}
-          ></Route>
+          />
+           <Route
+            path="/register"
+            element={<MainPage children={<Register/>} />}
+          />
         </Routes>
       </BrowserRouter>
     </ConfigProvider>
