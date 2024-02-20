@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Alert, Button } from "antd";
-import MapView from "./MapView";
+import React, { useEffect, useState } from "react";
+import { Alert } from "antd";
+import { Link } from "react-router-dom";
 
 export default function GeoLocation() {
-  const [UserLoc, setUserLoc] = useState({ latitude: 0, longitude: 0 });
+  const [userLoc, setUserLoc] = useState({ latitude: null, longitude: null });
   const [permit, setPermit] = useState(false);
 
-  // handler geo Function
+  // Handler for geo Function
   function errorHandler(err) {
     if (err.code === 1) {
       Alert("Error: Access is denied!");
@@ -15,7 +15,7 @@ export default function GeoLocation() {
     }
   }
 
-  const GetLocation = () => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setUserLoc({
@@ -26,23 +26,21 @@ export default function GeoLocation() {
       },
       errorHandler // Handle errors
     );
-  };
+  }, []); // Empty dependency array to run only once
 
   return (
     <div>
-      <header>
-        <Button onClick={() => GetLocation()}>Show My Location</Button>
-        <div>
-          {permit ? (
-            <>
-              <h2>Your location is !</h2>
-              <MapView {...UserLoc} />
-            </>
-          ) : (
-            ""
-          )}
-        </div>
-      </header>
+   
+
+          <Link
+            to={`https://www.google.com/maps/place/${userLoc?.latitude},${userLoc?.longitude}`}
+          >
+            Show My Location{userLoc.latitude && userLoc.longitude }
+          </Link>
+    
+          {userLoc.latitude ===null && userLoc.longitude ===null &&<Alert message="please check and active your location" type="error" />}
+  
+      
     </div>
   );
 }

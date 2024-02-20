@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BannerPg from "./Components/BannerPg";
 import { ConfigProvider } from "antd";
 import Register from "./pages/Register";
-
+import InstallationPrompt from "./Components/InstallationPrompt";
 function App() {
   return (
+    
     <ConfigProvider
       theme={{
         token: {
@@ -17,18 +18,16 @@ function App() {
         },
       }}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<MainPage children={<BannerPg />} />}
-          />
-           <Route
-            path="/register"
-            element={<MainPage children={<Register/>} />}
-          />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            
+            <Route path="/" element={<MainPage children={<BannerPg />} />} />
+            <Route
+              path="/register"
+              element={<MainPage children={<Register />} />}
+            />
+          </Routes>
+        </BrowserRouter>
     </ConfigProvider>
   );
 }

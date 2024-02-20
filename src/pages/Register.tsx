@@ -1,6 +1,6 @@
 import { UploadChangeParam } from "antd/lib/upload/interface";
 import TakePhoto from "../module/TakePhoto";
-import {CheckPermission} from '../Hook/DetectBrowser'
+import { CheckPermission } from "../Hook/DetectBrowser";
 import {
   Button,
   DatePicker,
@@ -14,8 +14,6 @@ import {
 } from "antd";
 import { useState } from "react";
 
-
-
 const { TextArea } = Input;
 const normFile = (e: UploadChangeParam | UploadChangeParam[]) => {
   if (Array.isArray(e)) {
@@ -26,17 +24,16 @@ const normFile = (e: UploadChangeParam | UploadChangeParam[]) => {
 
 const FormDisabledDemo = () => {
   const [permission, setPermission] = useState(CheckPermission());
-
+  console.log(permission);
   return (
     <Row justify="center">
       <Col xs={24} sm={20} md={16} lg={12} xl={10}>
-      
         <Form
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
           layout="horizontal"
           disabled={false}
-          style={{ maxWidth: 600 ,marginTop:6}}
+          style={{ maxWidth: 600, marginTop: 6 }}
         >
           <Form.Item label="Marital Status">
             <Radio.Group>
@@ -62,21 +59,24 @@ const FormDisabledDemo = () => {
           <Form.Item label="Description About Yourself">
             <TextArea rows={4} />
           </Form.Item>
-          {permission ?
-          <Form.Item
-            label="Upload Profile Image"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-            style={{marginTop:4}}
-          >
-            <Upload
-              action="/upload.do"
-              listType="picture-card"
-              accept="image/x-png,image/jpeg,image/gif"
+          {permission ? (
+            <Form.Item
+              label="Upload Profile Image"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              style={{ marginTop: 4 }}
             >
-              <TakePhoto />
-            </Upload>
-          </Form.Item> :''}
+              <Upload
+                action="/upload.do"
+                listType="picture-card"
+                accept="image/x-png,image/jpeg,image/gif"
+              >
+                <TakePhoto />
+              </Upload>
+            </Form.Item>
+          ) : (
+            ""
+          )}
           <Form.Item label="Button">
             <Button>Register</Button>
           </Form.Item>
@@ -89,4 +89,4 @@ const FormDisabledDemo = () => {
   );
 };
 
-export default FormDisabledDemo ;
+export default FormDisabledDemo;
